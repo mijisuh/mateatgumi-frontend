@@ -3,7 +3,7 @@
 [![Vercel](https://vercel.com/button)](https://mateatgumi.vercel.app)
 
 ## Overview
-맛있구미는 최신 사용자 리뷰를 기반으로 구미에서 음식 추천 서비스를 제공하는 사용자 친화적인 플랫폼입니다.
+맛있구미는 최신 사용자 리뷰를 기반으로 구미 지역의 음식점을 추천하는 사용자 친화적인 플랫폼입니다. RAG(Retrieval-Augmented Generation)와 LLM(Large Language Model) 기술을 활용하여 대화형(Chat) 형태로 사용자와 소통하며, 맞춤화된 음식 추천 서비스를 제공합니다.
 
 ### Live Demo
 Check out the live application here: [MatEatGumi-Frontend](https://mateatgumi.vercel.app)
@@ -75,7 +75,3 @@ mateatgumi-frontend/
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
----
-<br>
-
-Thank you for using MatEatGumi!
