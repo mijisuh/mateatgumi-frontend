@@ -1,4 +1,4 @@
-# MatEatGumi - 맛잇구미 🍴 (Frontend)
+# 🍽️ 맛있구미(MatEatGumi) - Frontend
 
 [![Vercel](https://vercel.com/button)](https://mateatgumi.vercel.app)
 
