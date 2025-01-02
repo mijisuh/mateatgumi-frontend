@@ -8,6 +8,9 @@ const BASE_URL = process.env.API_ENDPOINT;
 // This will be replaced at build time by Parcel with the appropriate value
 // from the corresponding .env file.
 
+// 현재 스레드 ID를 저장할 변수
+let threadId = null;
+
 function createMessageBubble(content, sender = "user") {
   const wrapper = document.createElement("div");
   wrapper.classList.add("message", sender === "user" ? "user-message" : "bot-message");
@@ -46,7 +49,10 @@ async function getAssistantResponse(userMessage) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message: userMessage }),
+    body: JSON.stringify({ 
+      message: userMessage,
+      thread_id: threadId, // 기존 thread_id가 있다면 포함
+    }),
   });
 
   if (!response.ok) {
@@ -54,6 +60,12 @@ async function getAssistantResponse(userMessage) {
   }
 
   const data = await response.json();
+
+  // 서버 응답에 thread_id가 포함되어 있으면 저장
+  if (data.thread_id) {
+    threadId = data.thread_id;
+  }
+
   return data.reply;
 }
 
