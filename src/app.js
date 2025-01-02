@@ -10,50 +10,25 @@ const BASE_URL = process.env.API_ENDPOINT;
 
 function createMessageBubble(content, sender = "user") {
   const wrapper = document.createElement("div");
-  wrapper.classList.add("mb-6", "flex", "items-start", "space-x-3");
+  wrapper.classList.add("message", sender === "user" ? "user-message" : "bot-message");
 
   const avatar = document.createElement("div");
-  avatar.classList.add(
-    "w-10",
-    "h-10",
-    "rounded-full",
-    "flex-shrink-0",
-    "flex",
-    "items-center",
-    "justify-center",
-    "font-bold",
-    "text-white"
-  );
-
-  if (sender === "assistant") {
-    avatar.classList.add("bg-gradient-to-br", "from-green-400", "to-green-600");
-    avatar.textContent = "A";
-  } else {
-    avatar.classList.add("bg-gradient-to-br", "from-blue-500", "to-blue-700");
-    avatar.textContent = "U";
-  }
+  avatar.classList.add("message-avatar");
+  avatar.textContent = sender === "user" ? "U" : "A";
 
   const bubble = document.createElement("div");
-  bubble.classList.add(
-    "max-w-full",
-    "md:max-w-2xl",
-    "p-3",
-    "rounded-lg",
-    "whitespace-pre-wrap",
-    "leading-relaxed",
-    "shadow-sm"
-  );
-
-  if (sender === "assistant") {
-    bubble.classList.add("bg-gray-200", "text-gray-900");
-  } else {
-    bubble.classList.add("bg-blue-600", "text-white");
-  }
-
+  bubble.classList.add("message-content");
   bubble.textContent = content;
 
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
+  // sender가 "user"인 경우 순서를 바꿔서 추가
+  if (sender === "user") {
+    wrapper.appendChild(bubble);
+    wrapper.appendChild(avatar);
+  } else {
+    wrapper.appendChild(avatar);
+    wrapper.appendChild(bubble);
+  }
+  
   return wrapper;
 }
 
@@ -64,7 +39,7 @@ function scrollToBottom() {
 async function getAssistantResponse(userMessage) {
   // const mode = apiSelector.value;
   // const url = mode === "assistant" ? `${BASE_URL}/assistant` : `${BASE_URL}/chat`;
-  const url = `${BASE_URL}/chat`;
+  const url = `${BASE_URL}/assistant`;
 
   const response = await fetch(url, {
     method: "POST",
